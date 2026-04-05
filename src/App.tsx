@@ -24,7 +24,7 @@ export default function App() {
 
           <Route element={<ApprovedRoute><Layout /></ApprovedRoute>}>
             <Route path="/" element={<CalendarPage />} />
-            <Route path="/eventos" element={<CalendarPage initialView="list" />} />
+            <Route path="/eventos" element={<CalendarPage />} />
           </Route>
 
           <Route element={<AdminRoute><Layout /></AdminRoute>}>

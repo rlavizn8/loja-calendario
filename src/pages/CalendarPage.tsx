@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Calendar as CalIcon, List } from 'lucide-react'
 import { useEvents } from '../hooks/useEvents'
 import { CalendarView } from '../components/calendar/CalendarView'
@@ -6,8 +7,14 @@ import { EventList } from '../components/events/EventList'
 import { EventDetail } from '../components/events/EventDetail'
 import type { CalendarEvent } from '../types'
 
-export function CalendarPage({ initialView = 'calendar' }: { initialView?: 'calendar' | 'list' }) {
-  const [viewMode, setViewMode] = useState<'calendar' | 'list'>(initialView)
+export function CalendarPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const viewMode = location.pathname === '/eventos' ? 'list' : 'calendar'
+
+  const setViewMode = (mode: 'calendar' | 'list') => {
+    navigate(mode === 'list' ? '/eventos' : '/', { replace: true })
+  }
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
   const { events, loading } = useEvents()
 
